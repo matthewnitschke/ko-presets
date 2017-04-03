@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script src="lib/knockout.js"></script>
+  <script src="lib/kavie.js"></script>
+  <script src="lib/ko-formatter.js"></script>
+
+  <script src="src/ko-presets.js"></script>
+
+  <style>
+    .validation-error{
+      border: solid 3px red;
+    }
+  </style>
+</head>
+<body>
+
+  <input type="text" data-bind="textInput: value, preset: Presets.phone">
+
+  <input type="button" value="Submit" data-bind="click: submit">
+
+  <script>
+    ko.applyBindings({
+      value: ko.observable().extend({
+        kavie: {
+          required: true,
+          numeric: true
+        }
+      }),
+      submit: function() {
+        Kavie.isValid(this);
+      }
+    })
+  </script>
+
+</body>
+</html>
